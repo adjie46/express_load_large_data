@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Area</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $("#example").DataTable({
+        processing: true,
+        serverSide: true,
+        retrieve: true,
+        autoWith: true,
+        paging: true,
+        destroy: true,
+        responsive: true,
+        searching: true,
+        ordering: false,
+        scrollX: true,
+        scrollY: true,
+        ajax: {
+            type: "GET",
+            url: `/data`,
+            dataSrc: function (json) {
+                return json.data;
+            },
+        },
+        stateSave: true,
+        language: {
+            emptyTable: "Data Dokumen Tidak Tersedia",
+            infoEmpty: "Data Dokumen Tidak Tersedia",
+            processing: `<button class="btn btn-primary" type="button" disabled="">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Loading...
+                    </button>`,
+        },
+        columns: [null, null, null, null],
+    })
+</script>
+
+</html>
